@@ -448,16 +448,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea98cafc2301fe4bb884f34d9fa6397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {x: 0, y: 0, z: 0}
+  Position: {x: 0, y: 0, z: 0}
   XTuning:
-    Proportional: 100
-    Integral: 1
-    Derivative: 500
+    Proportional: 0
+    Integral: 0
+    Derivative: 0
   YTuning:
+    Proportional: 0
+    Integral: 0
+    Derivative: 0
+  ZTuning:
+    Proportional: 0
+    Integral: 0
+    Derivative: 0
+  RelativeXTuning:
     Proportional: 100
     Integral: 1
     Derivative: 500
-  ZTuning:
+  RelativeYTuning:
+    Proportional: 100
+    Integral: 1
+    Derivative: 500
+  RelativeZTuning:
     Proportional: 100
     Integral: 1
     Derivative: 500

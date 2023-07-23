@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
   private Camera cam;
 
   [SerializeField]
-  private RigidbodyMoveToTarget moveToCursor;
+  private ForceTowardsPosition forceTowardsCursor;
 
   private void Start()
   {
@@ -19,6 +19,6 @@ public class PlayerController : MonoBehaviour
     var cursorPosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, cameraDistance));
     cursorPosition.z = this.transform.position.z;
 
-    this.moveToCursor.Target = cursorPosition;
+    this.forceTowardsCursor.Target = cursorPosition;
   }
 }
