@@ -23,6 +23,12 @@ public class CatmullRomSpline : Spline
   public bool Closed = false;
 
   /// <summary>
+  /// Whether to approximate uniformity when sampling the spline to counter disproportionate segment lengths.
+  /// </summary>
+  [Tooltip("Whether to approximate uniformity when sampling the spline to counter disproportionate segment lengths.")]
+  public bool ApproximateUniformity = true;
+
+  /// <summary>
   /// Whether to guide the spline through the attached game object's children.
   /// </summary>
   [Tooltip("Whether to guide the spline through the attached game object's children.")]
@@ -35,19 +41,48 @@ public class CatmullRomSpline : Spline
   public List<Vector3> Points;
 
   private List<CatmullRomSplineSegment> segments;
+  private float length;
 
   public override Vector3 Sample(float progress)
   {
     if (this.segments.Count > 0)
     {
-      // Find the progress relative to the segment.
-      // TODO: This doesn't account for different segment lengths, which would be more useful.
-      progress = Mathf.Clamp01(progress);
-      var segmentIndex = Mathf.Min(Mathf.FloorToInt(progress * this.segments.Count), this.segments.Count - 1);
-      var segmentProgress = progress * this.segments.Count - segmentIndex;
-      return this.segments[segmentIndex].Sample(segmentProgress);
+      if (ApproximateUniformity)
+      {
+        return this.SampleUniformly(progress);
+      }
+      return this.SampleNonUniformly(progress);
     }
     return Vector3.zero;
+  }
+
+  private Vector3 SampleUniformly(float progress)
+  {
+    // Scale the progress to the total length, then iteratively reduce it by each segment to determine the segment to sample and the distance along it.
+    var segmentDistance = Mathf.Clamp01(progress) * this.length;
+    var segmentIndex = 0;
+    while (segmentIndex < this.segments.Count - 1 && segmentDistance > this.segments[segmentIndex].Length)
+    {
+      segmentDistance -= this.segments[segmentIndex].Length;
+      segmentIndex++;
+    }
+
+    // Divide the distance along the segment by the segment's length to get the progress within the segment.
+    var segmentProgress = segmentDistance / this.segments[segmentIndex].Length;
+
+    return this.segments[segmentIndex].Sample(segmentProgress);
+  }
+
+  private Vector3 SampleNonUniformly(float progress)
+  {
+    // Scale the progress to the segment count to determine the segment to sample.
+    var scaledProgress = Mathf.Clamp01(progress) * this.segments.Count;
+    var segmentIndex = Mathf.Min(Mathf.FloorToInt(scaledProgress), this.segments.Count - 1);
+
+    // Subtract the segment index to get the progress within the segment.
+    var segmentProgress = scaledProgress - segmentIndex;
+
+    return this.segments[segmentIndex].Sample(segmentProgress);
   }
 
   public void Recalculate()
@@ -95,6 +130,8 @@ public class CatmullRomSpline : Spline
     {
       this.segments.Add(new CatmullRomSplineSegment(path[i - 1], path[i], path[i + 1], path[i + 2], this.Tuning));
     }
+
+    this.length = this.segments.Sum(segment => segment.Length);
   }
 
   private void Start()

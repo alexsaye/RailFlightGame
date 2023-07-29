@@ -10,9 +10,9 @@ public abstract class Spline : MonoBehaviour
   protected virtual void OnDrawGizmos()
   {
     var previous = this.Sample(0f);
-    for (var i = 1; i <= 100; i++)
+    for (var i = 1; i <= 1000; i++)
     {
-      var t = i / 100f;
+      var t = i / 1000f;
       var current = this.Sample(t);
       Gizmos.DrawLine(previous, current);
       previous = current;

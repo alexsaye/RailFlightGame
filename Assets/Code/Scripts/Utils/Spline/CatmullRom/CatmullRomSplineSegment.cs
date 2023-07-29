@@ -10,6 +10,11 @@ public struct CatmullRomSplineSegment
   private Vector3 c;
   private Vector3 d;
 
+  /// <summary>
+  /// The approximate length of the segment.
+  /// </summary>
+  public readonly float Length;
+
   public CatmullRomSplineSegment(Vector3 startControl, Vector3 startPoint, Vector3 endPoint, Vector3 endControl, CatmullRomSplineSegmentTuning tuning)
   {
     var startKnot = Mathf.Pow(Vector3.Distance(startControl, startPoint), tuning.Alpha);
@@ -23,6 +28,8 @@ public struct CatmullRomSplineSegment
     this.b = -3f * (startPoint - endPoint) - 2f * startTangent - endTangent;
     this.c = startTangent;
     this.d = startPoint;
+
+    this.Length = Vector3.Distance(startPoint, endPoint);
   }
 
   public Vector3 Sample(float progress)
