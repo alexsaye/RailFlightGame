@@ -132,7 +132,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 26164468}
-  - component: {fileID: 26164469}
   m_Layer: 0
   m_Name: TestSpline
   m_TagString: Untagged
@@ -168,38 +167,6 @@ Transform:
   - {fileID: 1839323407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &26164469
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 26164466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0437ab7805c0ae4dad09259a31cb1c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Tuning:
-    Tension: 0
-    Alpha: 0.5
-  Closed: 1
-  ApproximateUniformity: 1
-  UseChildrenAsPoints: 1
-  Points:
-  - {x: -14.21, y: 5.11, z: 2.56}
-  - {x: -7.03, y: 2.498, z: 3.89}
-  - {x: -6.1099997, y: -0.03, z: 9}
-  - {x: 1.1, y: 4.1, z: 10.26}
-  - {x: 29.93, y: 3.07, z: 10.49}
-  - {x: 30.02, y: 3.07, z: -10.93}
-  - {x: 29.09, y: 3.07, z: -12.57}
-  - {x: 27.63, y: 3.07, z: -11.32}
-  - {x: 26.26, y: 3.07, z: -12.37}
-  - {x: 25.25, y: 3.07, z: -11.06}
-  - {x: 23.96, y: 3.07, z: -12.32}
-  - {x: 22.61, y: 3.07, z: -11.05}
-  - {x: 21.38, y: 3.07, z: -12.04}
 --- !u!1 &650827590
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,7 +686,6 @@ GameObject:
   - component: {fileID: 1288960729}
   - component: {fileID: 1288960732}
   - component: {fileID: 1288960731}
-  - component: {fileID: 1288960730}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -742,27 +708,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1606880209}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1288960730
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1288960728}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1288960731
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -838,7 +783,7 @@ Transform:
   m_GameObject: {fileID: 1295730596}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22.61, y: 3.07, z: -11.05}
+  m_LocalPosition: {x: 21.33, y: 3.07, z: -13.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -981,7 +926,7 @@ GameObject:
   - component: {fileID: 1606880207}
   - component: {fileID: 1606880206}
   m_Layer: 0
-  m_Name: MoveAlongSplineTest
+  m_Name: PlayerGuide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -996,12 +941,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1606880205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 500e4bcd7ea57c147b4f24472f230878, type: 3}
+  m_Script: {fileID: 11500000, guid: 61487b6227f198246908287bf2c13519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spline: {fileID: 26164469}
-  Progress: 0.17
-  Speed: 1
+  services:
+    PathBuilder: {fileID: 1984688925}
+  Progress: 0
+  Rate: 0.1
 --- !u!23 &1606880207
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1061,7 +1007,7 @@ Transform:
   m_GameObject: {fileID: 1606880205}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.068543434, y: 3.7118595, z: 10.1803665}
+  m_LocalPosition: {x: -14.21, y: 5.11, z: 2.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1093,7 +1039,7 @@ Transform:
   m_GameObject: {fileID: 1839323406}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.38, y: 3.07, z: -12.04}
+  m_LocalPosition: {x: 9.02, y: 3.07, z: -13.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1112,8 +1058,10 @@ GameObject:
   - component: {fileID: 1984688919}
   - component: {fileID: 1984688918}
   - component: {fileID: 1984688917}
-  - component: {fileID: 1984688916}
   - component: {fileID: 1984688922}
+  - component: {fileID: 1984688916}
+  - component: {fileID: 1984688924}
+  - component: {fileID: 1984688925}
   m_Layer: 0
   m_Name: PlayerTest
   m_TagString: Untagged
@@ -1128,35 +1076,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1984688915}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eea98cafc2301fe4bb884f34d9fa6397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {x: 0, y: 0, z: 0}
-  XTuning:
+  TargetTransform: {fileID: 0}
+  TargetPosition: {x: 0, y: 0, z: 0}
+  xCorrector:
     Proportional: 0
     Integral: 0
     Derivative: 0
-  YTuning:
+  yCorrector:
     Proportional: 0
     Integral: 0
     Derivative: 0
-  ZTuning:
+  zCorrector:
     Proportional: 0
     Integral: 0
     Derivative: 0
-  RelativeXTuning:
-    Proportional: 100
-    Integral: 1
+  relativeXCorrector:
+    Proportional: 1
+    Integral: 0
     Derivative: 500
-  RelativeYTuning:
-    Proportional: 100
-    Integral: 1
+  relativeYCorrector:
+    Proportional: 1
+    Integral: 0
     Derivative: 500
-  RelativeZTuning:
-    Proportional: 100
-    Integral: 1
+  relativeZCorrector:
+    Proportional: 1
+    Integral: 0
     Derivative: 500
 --- !u!54 &1984688917
 Rigidbody:
@@ -1180,7 +1129,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -1281,10 +1230,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984688915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16604775297d9ef43bc6c026ef45f2d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7484ce69fabdd9a4991d488b89f66e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forceTowardsCursor: {fileID: 1984688916}
+  services:
+    Camera: {fileID: 963194227}
+    ForceTowardsCursor: {fileID: 1984688916}
+    ForceTowardsGuide: {fileID: 1984688924}
+    PathBuilder: {fileID: 1984688925}
+--- !u!114 &1984688924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984688915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea98cafc2301fe4bb884f34d9fa6397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetTransform: {fileID: 1606880209}
+  TargetPosition: {x: 0, y: 0, z: 0}
+  xCorrector:
+    Proportional: 1
+    Integral: 0
+    Derivative: 500
+  yCorrector:
+    Proportional: 1
+    Integral: 0
+    Derivative: 500
+  zCorrector:
+    Proportional: 1
+    Integral: 0
+    Derivative: 500
+  relativeXCorrector:
+    Proportional: 0
+    Integral: 0
+    Derivative: 0
+  relativeYCorrector:
+    Proportional: 0
+    Integral: 0
+    Derivative: 0
+  relativeZCorrector:
+    Proportional: 0
+    Integral: 0
+    Derivative: 0
+--- !u!114 &1984688925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1984688915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5acac6d8c25b8944bd05170b570bb8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Nodes:
+  - {fileID: 26164468}
+  Tension: 0.5
+  Alpha: 0.5
+  Closed: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
